@@ -1,21 +1,26 @@
-import { generateKey, encryptWithPublicKey, decryptWithPrivateKey } from './src/crypto.js';
+import { generateKey, encryptWithPublicKey, decryptWithPrivateKey } from './src/crypto';
 
-console.log("Iniciando o projeto de Criptografia Assimétrica Simulada...");
+console.log("Iniciando o projeto de Criptografia Simulada...");
 
-// Gerar pares de chaves (simulados)
-const publicKey = generateKey();
-const privateKey = generateKey();
+// Gerar uma chave
+const sharedKey = generateKey();
 
-console.log("Chave Pública:", publicKey);
-console.log("Chave Privada:", privateKey);
+console.log("Chave Compartilhada:", sharedKey);
 
 // Texto original
 const plaintext = "Mensagem secreta";
 
 // Criptografar
-const encryptedText = encryptWithPublicKey(plaintext, publicKey);
+const encryptedText = encryptWithPublicKey(plaintext, sharedKey);
 console.log("Texto Criptografado:", encryptedText);
 
 // Descriptografar
-const decryptedText = decryptWithPrivateKey(encryptedText, privateKey);
+const decryptedText = decryptWithPrivateKey(encryptedText, sharedKey);
 console.log("Texto Descriptografado:", decryptedText);
+
+// Verificar se o texto original é igual ao texto descriptografado
+if (plaintext === decryptedText) {
+    console.log("Criptografia e Descriptografia bem-sucedidas!");
+} else {
+    console.log("Erro: Falha na descriptografia.");
+}
